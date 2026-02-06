@@ -33,19 +33,6 @@
             pointer-events: none;
         }
         
-        @keyframes ledGlow {
-            0%, 100% { 
-                filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8)) 
-                        drop-shadow(0 0 40px rgba(168, 85, 247, 0.6))
-                        drop-shadow(0 0 60px rgba(168, 85, 247, 0.4));
-            }
-            50% { 
-                filter: drop-shadow(0 0 30px rgba(168, 85, 247, 1)) 
-                        drop-shadow(0 0 60px rgba(168, 85, 247, 0.8))
-                        drop-shadow(0 0 90px rgba(168, 85, 247, 0.6));
-            }
-        }
-        
         @keyframes blink {
             0%, 49%, 51%, 100% { opacity: 1; }
             50% { opacity: 0.3; }
@@ -53,7 +40,7 @@
         
         .loading-logo {
             width: 140px;
-            animation: ledGlow 2s ease-in-out infinite, blink 3s ease-in-out infinite;
+            animation: blink 3s ease-in-out infinite;
         }
         
         .loading-text {
