@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LED BROS - 3D Models & Custom Quotes</title>
+    <title>LED BROS - Wholesale LED Signs</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/V6UMxtC.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -11,17 +11,298 @@
         body { font-family: 'Inter', sans-serif; }
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
         .float-animation { animation: float 3s ease-in-out infinite; }
+        .hidden { display: none; }
+        
+        /* Loading Screen */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        #loadingScreen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes ledGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8)) 
+                        drop-shadow(0 0 40px rgba(168, 85, 247, 0.6))
+                        drop-shadow(0 0 60px rgba(168, 85, 247, 0.4));
+            }
+            50% { 
+                filter: drop-shadow(0 0 30px rgba(168, 85, 247, 1)) 
+                        drop-shadow(0 0 60px rgba(168, 85, 247, 0.8))
+                        drop-shadow(0 0 90px rgba(168, 85, 247, 0.6));
+            }
+        }
+        
+        @keyframes blink {
+            0%, 49%, 51%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .loading-logo {
+            width: 140px;
+            animation: ledGlow 2s ease-in-out infinite, blink 3s ease-in-out infinite;
+        }
+        
+        .loading-text {
+            margin-top: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #c4b5fd;
+            text-align: center;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(196, 181, 253, 0.5);
+        }
+        
+        .loading-bar-container {
+            width: 280px;
+            height: 4px;
+            background: rgba(168, 85, 247, 0.2);
+            border-radius: 10px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+        
+        @keyframes loadingProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        .loading-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #a855f7, #c084fc, #a855f7);
+            background-size: 200% 100%;
+            border-radius: 10px;
+            animation: loadingProgress 5s ease-out forwards, shimmer 1.5s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        @media (max-width: 640px) {
+            .loading-logo { width: 110px; }
+            .loading-text { font-size: 14px; }
+            .loading-bar-container { width: 220px; }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-purple-100 via-purple-50 to-blue-50">
     
-    <div class="container mx-auto px-4 py-6 max-w-6xl">
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <img src="https://i.imgur.com/V6UMxtC.png" alt="LED BROS" class="loading-logo" />
+        <div class="loading-text">
+            Start Selling Custom LEDs<br />
+            Make 2k - 5k+ casually in your city 💰
+        </div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+    
+    <!-- Wholesale Page -->
+    <div id="wholesalePage" class="container mx-auto px-4 py-6 max-w-6xl">
+        
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <img src="https://i.imgur.com/V6UMxtC.png" alt="LED BROS" class="w-32 sm:w-40 md:w-48 mx-auto mb-3 float-animation" style="filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.4))" />
+            <h1 class="text-lg sm:text-xl font-bold text-purple-700">Wholesale LED Signs</h1>
+            <p class="text-sm text-purple-600 font-semibold mt-1">Franchise & Reseller Pricing</p>
+            
+            <!-- Franchise Button -->
+            <button onclick="showCodeModal()" class="mt-4 bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-bold text-sm shadow-lg transition">
+                🔐 Franchise Access
+            </button>
+        </div>
+
+        <!-- Card -->
+        <div class="bg-white rounded-2xl shadow-2xl border-2 border-purple-200">
+            
+            <!-- Hero -->
+            <div class="bg-gradient-to-r from-purple-300 via-purple-200 to-blue-200 p-6 sm:p-10 text-center rounded-t-2xl">
+                <div class="bg-white rounded-full px-4 py-1.5 inline-block mb-4">
+                    <p class="text-purple-900 text-xs sm:text-sm font-bold">✨ Premium Wholesale LED Signs</p>
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-black text-black mb-3 leading-tight">
+                    Custom LED Signs<br />
+                    <span class="text-purple-700">Wholesale Pricing</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-black font-bold mb-2">💡 Starting at $200</p>
+                <p class="text-sm text-purple-900 font-medium">📦 Single or Bulk Orders • 🎨 Custom Designs • 🚚 Fast Shipping</p>
+            </div>
+
+            <!-- Content -->
+            <div class="p-4 sm:p-8 lg:p-10">
+                
+                <!-- Benefits -->
+                <div class="mb-6">
+                    <h3 class="text-xl sm:text-2xl font-black text-black mb-4">LED Bros Supplier</h3>
+                    <div class="space-y-3">
+                        <div class="flex gap-3 bg-purple-50 p-3 rounded-xl border border-purple-200">
+                            <div class="w-5 h-5 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-800 text-sm sm:text-base font-bold">Premium LED Signs</p>
+                                <p class="text-gray-600 text-xs sm:text-sm">High-quality custom LED signs ready for your clients</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 bg-purple-50 p-3 rounded-xl border border-purple-200">
+                            <div class="w-5 h-5 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-800 text-sm sm:text-base font-bold">Tailored Supplier Pricing</p>
+                                <p class="text-gray-600 text-xs sm:text-sm">Custom quotes based on complexity and size</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 bg-purple-50 p-3 rounded-xl border border-purple-200">
+                            <div class="w-5 h-5 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-800 text-sm sm:text-base font-bold">Proprietary Design</p>
+                                <p class="text-gray-600 text-xs sm:text-sm">LED Bros patented</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 bg-purple-50 p-3 rounded-xl border border-purple-200">
+                            <div class="w-5 h-5 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-800 text-sm sm:text-base font-bold">48-72 Hour Turnaround</p>
+                                <p class="text-gray-600 text-xs sm:text-sm">Fast delivery for urgent client projects</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 bg-purple-50 p-3 rounded-xl border border-purple-200">
+                            <div class="w-5 h-5 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-800 text-sm sm:text-base font-bold">Volume Discounts Available</p>
+                                <p class="text-gray-600 text-xs sm:text-sm">Special pricing for bulk orders</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Box -->
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-center mb-6">
+                    <p class="text-xs text-white font-bold uppercase tracking-wide mb-1">Starting At</p>
+                    <p class="text-5xl font-black text-white mb-1">$200</p>
+                    <p class="text-purple-100 text-sm">Per Custom LED Sign</p>
+                    <div class="mt-4 pt-4 border-t border-purple-400">
+                        <p class="text-white text-sm font-semibold">💎 Wholesale & Franchise Pricing</p>
+                        <p class="text-purple-100 text-xs mt-1">Contact us for volume discounts</p>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-5 sm:p-6 border-2 border-purple-200">
+                    <h3 class="text-xl sm:text-2xl font-black text-black mb-1">Request a Quote</h3>
+                    <p class="text-gray-600 text-sm mb-5">Get wholesale pricing for your LED sign project</p>
+                    
+                    <form action="https://formspree.io/f/xpqqwndn" method="POST" class="space-y-4">
+                        <input type="hidden" name="form_type" value="wholesale" />
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1.5">Business Name *</label>
+                            <input type="text" name="business_name" required placeholder="Your Business Name" class="w-full px-3 py-2.5 text-sm border-2 border-purple-200 rounded-lg focus:border-purple-500 focus:outline-none" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1.5">Your Name *</label>
+                            <input type="text" name="name" required placeholder="Full Name" class="w-full px-3 py-2.5 text-sm border-2 border-purple-200 rounded-lg focus:border-purple-500 focus:outline-none" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1.5">Email Address *</label>
+                            <input type="email" name="email" required placeholder="your@email.com" class="w-full px-3 py-2.5 text-sm border-2 border-purple-200 rounded-lg focus:border-purple-500 focus:outline-none" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1.5">Phone Number *</label>
+                            <input type="tel" name="phone" required placeholder="(555) 123-4567" class="w-full px-3 py-2.5 text-sm border-2 border-purple-200 rounded-lg focus:border-purple-500 focus:outline-none" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1.5">Project Details *</label>
+                            <textarea name="project_details" required rows="4" placeholder="Describe your LED sign needs, quantity, size, colors..." class="w-full px-3 py-2.5 text-sm border-2 border-purple-200 rounded-lg focus:border-purple-500 focus:outline-none resize-none"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1.5">Upload Reference Images (Optional)</label>
+                            <div class="relative border-2 border-dashed border-purple-300 bg-white rounded-lg p-4 text-center">
+                                <input type="file" name="files" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*,.pdf,.ai" multiple />
+                                <svg class="w-8 h-8 text-purple-500 mx-auto mb-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                                <p class="text-gray-700 font-bold text-xs">Click to upload files</p>
+                                <p class="text-xs text-gray-500">PNG, JPG, PDF, AI</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-3.5 rounded-lg font-black text-base shadow-lg hover:from-purple-700 hover:to-purple-800 transition">
+                            Get Wholesale Quote
+                        </button>
+
+                        <p class="text-xs text-gray-500 text-center">⚡ We'll respond within 24 hours</p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8">
+            <p class="text-gray-700 font-bold text-sm">© 2025 LED BROS</p>
+            <p class="text-purple-600 text-xs font-semibold mt-1">Custom LED Signs • Wholesale Pricing Available</p>
+        </div>
+
+    </div>
+
+    <!-- 3D Models Page (Hidden) -->
+    <div id="modelsPage" class="container mx-auto px-4 py-6 max-w-6xl hidden">
         
         <!-- Logo -->
         <div class="text-center mb-8">
             <img src="https://i.imgur.com/V6UMxtC.png" alt="LED BROS" class="w-32 sm:w-40 md:w-48 mx-auto mb-3 float-animation" style="filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.4))" />
             <h1 class="text-lg sm:text-xl font-bold text-purple-700">3D Models & Custom Quotes</h1>
             <p class="text-sm text-purple-600 font-semibold mt-1">Proprietary Models for LED Bros Franchisees</p>
+            
+            <!-- Back Button -->
+            <button onclick="showWholesalePage()" class="mt-4 bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg font-bold text-sm shadow-lg transition">
+                ← Back to Wholesale
+            </button>
         </div>
 
         <!-- Card -->
@@ -114,6 +395,8 @@
                     <p class="text-gray-600 text-sm mb-5">Submit your project details below</p>
                     
                     <form action="https://formspree.io/f/xpqqwndn" method="POST" class="space-y-4">
+                        <input type="hidden" name="form_type" value="3d_models" />
+                        
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-1.5">Franchise Name / Location *</label>
                             <input type="text" name="franchise" required placeholder="e.g. LED Bros Montreal" class="w-full px-3 py-2.5 text-sm border-2 border-purple-200 rounded-lg focus:border-purple-500 focus:outline-none" />
@@ -151,7 +434,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-3.5 rounded-lg font-black text-base shadow-lg">
+                        <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-3.5 rounded-lg font-black text-base shadow-lg hover:from-purple-700 hover:to-purple-800 transition">
                             Get My Custom Quote
                         </button>
 
@@ -169,6 +452,87 @@
         </div>
 
     </div>
+
+    <!-- Code Modal -->
+    <div id="codeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+        <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl">
+            <h3 class="text-2xl font-black text-black mb-2">Franchise Access</h3>
+            <p class="text-gray-600 text-sm mb-6">Enter your franchise access code</p>
+            
+            <input type="text" id="codeInput" placeholder="Enter code..." class="w-full px-4 py-3 text-sm border-2 border-purple-200 rounded-lg focus:border-purple-500 focus:outline-none mb-4" />
+            
+            <div id="errorMessage" class="hidden text-red-600 text-sm mb-4 font-semibold">❌ Invalid code. Please try again.</div>
+            
+            <div class="flex gap-3">
+                <button onclick="hideCodeModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-lg font-bold text-sm transition">
+                    Cancel
+                </button>
+                <button onclick="checkCode()" class="flex-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-3 rounded-lg font-bold text-sm transition">
+                    Access
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showCodeModal() {
+            document.getElementById('codeModal').classList.remove('hidden');
+            document.getElementById('codeInput').focus();
+        }
+
+        function hideCodeModal() {
+            document.getElementById('codeModal').classList.add('hidden');
+            document.getElementById('codeInput').value = '';
+            document.getElementById('errorMessage').classList.add('hidden');
+        }
+
+        function checkCode() {
+            const code = document.getElementById('codeInput').value;
+            if (code === 'LEDBro333') {
+                hideCodeModal();
+                showModelsPage();
+            } else {
+                document.getElementById('errorMessage').classList.remove('hidden');
+            }
+        }
+
+        function showModelsPage() {
+            document.getElementById('wholesalePage').classList.add('hidden');
+            document.getElementById('modelsPage').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function showWholesalePage() {
+            document.getElementById('modelsPage').classList.add('hidden');
+            document.getElementById('wholesalePage').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        // Allow Enter key to submit code
+        document.getElementById('codeInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkCode();
+            }
+        });
+
+        // Close modal on outside click
+        document.getElementById('codeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideCodeModal();
+            }
+        });
+
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.classList.add('fade-out');
+                setTimeout(function() {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 5000);
+        });
+    </script>
 
 </body>
 </html>
